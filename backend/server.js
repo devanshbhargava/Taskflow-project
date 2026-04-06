@@ -9,6 +9,10 @@ const authRoutes = require("./routes/authroutes")
 
 connectdb()
 
+app.get("/", (req, res) => {
+  res.send("TaskFlow API is running 🚀");
+});
+
 app.use(cors({
   origin: "http://localhost:3000"
 }));
