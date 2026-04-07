@@ -1,3 +1,4 @@
+import cors from "cors";
 const express = require("express")
 const mongoose = require("mongoose")
 const cors = require("cors")
@@ -7,14 +8,18 @@ const connectdb = require("./config/db")
 const taskRoutes = require("./routes/taskRoutes")
 const authRoutes = require("./routes/authroutes")
 
+
 connectdb()
 
 app.get("/", (req, res) => {
   res.send("TaskFlow API is running 🚀");
 });
 
+
+
 app.use(cors({
-  origin: "http://localhost:3000"
+  origin: "https://taskflow-project-cj1v-lsghrvlso-devansh6.vercel.app",
+  credentials: true
 }));
 app.use("/",require("./routes/taskapi"))
 app.use(express.json())
