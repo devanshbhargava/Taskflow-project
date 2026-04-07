@@ -13,7 +13,7 @@ function Dashboard() {
     const token = localStorage.getItem("token");
 
     try {
-      const res = await fetch("http://localhost:5000/api/tasks", {
+      const res = await fetch(`${process.env.REACT_APP_API_URL}/api/tasks`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -56,7 +56,7 @@ function Dashboard() {
     }
 
     try {
-      const res = await fetch("http://localhost:5000/api/tasks", {
+      const res = await fetch(`${process.env.REACT_APP_API_URL}/api/tasks`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -87,7 +87,7 @@ function Dashboard() {
   const token = localStorage.getItem("token");
 
   try {
-    const res = await fetch(`http://localhost:5000/api/tasks/${task._id}`, {
+    const res = await fetch(`${process.env.REACT_APP_API_URL}/api/tasks/${task._id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -114,7 +114,7 @@ function Dashboard() {
     const token = localStorage.getItem("token");
 
     try {
-      const res = await fetch(`http://localhost:5000/api/tasks/${id}`, {
+      const res = await fetch(`${process.env.REACT_APP_API_URL}/api/tasks/${id}`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -145,7 +145,7 @@ function Dashboard() {
     if (!newTitle) return;
 
     try {
-      const res = await fetch(`http://localhost:5000/api/tasks/${id}`, {
+      const res = await fetch(`${process.env.REACT_APP_API_URL}/api/tasks/${id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
