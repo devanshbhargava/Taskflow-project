@@ -1,6 +1,11 @@
 import axios from "axios";
 const API_URL = process.env.REACT_APP_API_URL;
 
+export const getTasks = async () => {
+  const res = await fetch(`${API_URL}/api/tasks`);
+  return res.json();
+};
+
 export const loginUser = async (data) => {
   const res = await fetch(`${API_URL}/login`, {
     method: "POST",
