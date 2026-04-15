@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { API_URL } from "./service/api"; // ✅ use central API
 
 function Signup() {
   const [name, setName] = useState("");
@@ -6,26 +7,40 @@ function Signup() {
   const [password, setPassword] = useState("");
 
   async function handleSignup(e) {
-  e.preventDefault();
+    e.preventDefault();
 
-  const res = await fetch(`${process.env.REACT_APP_API_URL}/api/auth/signup`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ name, email, password }),
-  });
+    try {
+      const res = await fetch(`${API_URL}/api/auth/signup`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ name, email, password }),
+      });
 
-  const data = await res.json();
+      const data = await res.json();
 
-  // ✅ store token AFTER getting response
-  localStorage.setItem("token", data.token);
+      console.log("SIGNUP RESPONSE:", data);
 
-  alert("Signup successful");
+      // ✅ handle error properly
+      if (!res.ok || !data.token) {
+        alert(data.message || "Signup failed");
+        return;
+      }
 
-  // ✅ redirect AFTER success
-  window.location.href = "/dashboard";
-}
+      // ✅ store token
+      localStorage.setItem("token", data.token);
+
+      alert("Signup successful");
+
+      // ✅ redirect
+      window.location.href = "/dashboard";
+
+    } catch (error) {
+      console.error("SIGNUP ERROR:", error);
+      alert("Something went wrong");
+    }
+  }
 
   return (
     <form onSubmit={handleSignup}>
@@ -34,19 +49,25 @@ function Signup() {
       <input
         type="text"
         placeholder="Enter name"
+        value={name}
         onChange={(e) => setName(e.target.value)}
+        required
       />
 
       <input
         type="email"
         placeholder="Enter email"
+        value={email}
         onChange={(e) => setEmail(e.target.value)}
+        required
       />
 
       <input
         type="password"
         placeholder="Enter password"
+        value={password}
         onChange={(e) => setPassword(e.target.value)}
+        required
       />
 
       <button type="submit">Signup</button>
