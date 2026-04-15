@@ -1,39 +1,46 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { API_URL } from "./service/api";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   async function handleLogin(e) {
-  e.preventDefault();
+    e.preventDefault();
 
-  const res = await fetch(`${process.env.REACT_APP_API_URL}/api/auth/login`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ email, password }),
-  });
+    try {
+      const res = await fetch(`${API_URL}/api/auth/login`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      });
 
-  const data = await res.json();
+      const data = await res.json();
 
-  console.log("LOGIN RESPONSE:", data); // 🔍 DEBUG
+      console.log("LOGIN RESPONSE:", data);
 
-  // ✅ CHECK BEFORE SAVING
-  if (!res.ok || !data.token) {
-    alert(data.message || "Login failed");
-    return;
+      // ✅ Handle error
+      if (!res.ok || !data.token) {
+        alert(data.message || "Login failed");
+        return;
+      }
+
+      // ✅ Save token
+      localStorage.setItem("token", data.token);
+
+      alert("Login successful");
+
+      // ✅ Redirect
+      window.location.href = "/dashboard";
+
+    } catch (error) {
+      console.error("LOGIN ERROR:", error);
+      alert("Something went wrong. Please try again.");
+    }
   }
-
-  // ✅ STORE TOKEN
-  localStorage.setItem("token", data.token);
-
-  alert("Login successful");
-
-  // ✅ REDIRECT (IMPORTANT)
-  window.location.href = "/dashboard";
-}
 
   return (
     <form onSubmit={handleLogin}>
@@ -42,22 +49,26 @@ function Login() {
       <input
         type="email"
         placeholder="Enter email"
+        value={email}
         onChange={(e) => setEmail(e.target.value)}
+        required
       />
 
       <input
         type="password"
         placeholder="Enter password"
+        value={password}
         onChange={(e) => setPassword(e.target.value)}
+        required
       />
 
       <button type="submit">Login</button>
+
       <p>
         Don't have an account? <Link to="/signup">Signup</Link>
       </p>
     </form>
   );
 }
-
 
 export default Login;

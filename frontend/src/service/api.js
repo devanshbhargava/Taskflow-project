@@ -1,8 +1,15 @@
 import axios from "axios";
-const API_URL = process.env.REACT_APP_API_URL;
+export const API_URL = process.env.REACT_APP_API_URL;
 
 export const getTasks = async () => {
-  const res = await fetch(`${API_URL}/api/tasks`);
+  const res = await fetch(`${API_URL}/api/tasks`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${localStorage.getItem("token")}`
+    }
+  });
+
   return res.json();
 };
 
@@ -32,4 +39,5 @@ export const signupUser = async (data) => {
 const Api = axios.create({
     baseURL: process.env.REACT_APP_API_URL + "/api/tasks",
 })
+
 export default Api;
