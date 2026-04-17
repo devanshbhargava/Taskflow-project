@@ -1,5 +1,5 @@
 import axios from "axios";
-export const API_URL = process.env.REACT_APP_API_URL;
+export const API_URL = "https://taskflow-project-wdmn.onrender.com";
 
 export const getTasks = async () => {
   const res = await fetch(`${API_URL}/api/tasks`, {
@@ -14,7 +14,7 @@ export const getTasks = async () => {
 };
 
 export const loginUser = async (data) => {
-  const res = await fetch(`${API_URL}/login`, {
+  const res = await fetch(`${API_URL}/api/auth/login`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -26,7 +26,7 @@ export const loginUser = async (data) => {
 };
 
 export const signupUser = async (data) => {
-  const res = await fetch(`${API_URL}/signup`, {
+  const res = await fetch(`${API_URL}/api/auth/signup`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
