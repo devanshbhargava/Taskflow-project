@@ -12,12 +12,13 @@ connectdb();
 
 // ✅ Middleware FIRST
 app.use(cors({
-  origin: [
-    "http://localhost:3000",
-    "https://taskflow-project-liard.vercel.app"
-  ],
-  credentials: true
+  origin: "https://taskflow-project-liard.vercel.app",
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true,
+  allowedHeaders: ["Content-Type", "Authorization"]
 }));
+
+app.options("*", cors()); // 🔥 preflight fix
 app.use(express.json());
 
 // ✅ Routes
