@@ -11,7 +11,13 @@ const authRoutes = require("./routes/authroutes");
 connectdb();
 
 // ✅ Middleware FIRST
-app.use(cors());
+app.use(cors({
+  origin: [
+    "http://localhost:3000",
+    "https://taskflow-project-liard.vercel.app"
+  ],
+  credentials: true
+}));
 app.use(express.json());
 
 // ✅ Routes
