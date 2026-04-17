@@ -18,10 +18,7 @@ app.use(cors({
   credentials: true
 }));
 
-// 🔥 VERY IMPORTANT (preflight)
-app.options("/*", (req, res) => {
-  res.sendStatus(200);
-});
+
 // ✅ Routes
 app.use("/api/tasks", taskRoutes);
 app.use("/api/auth", authRoutes);
