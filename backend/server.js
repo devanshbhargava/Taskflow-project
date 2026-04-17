@@ -11,16 +11,29 @@ const authRoutes = require("./routes/authroutes");
 connectdb();
 
 // ✅ Middleware FIRST
-app.use(cors({
-  origin: "https://taskflow-project-liard.vercel.app",
-  methods: ["GET", "POST", "PUT", "DELETE"],
-  credentials: true,
-  allowedHeaders: ["Content-Type", "Authorization"]
-}));
+const allowedOrigins = [
+  "http://localhost:3000",
+  "https://taskflow-project-liard.vercel.app"
+];
 
-app.options("*", cors()); // 🔥 preflight fix
-app.use(express.json());
+app.use((req, res, next) => {
+  const origin = req.headers.origin;
 
+  if (allowedOrigins.includes(origin)) {
+    res.setHeader("Access-Control-Allow-Origin", origin);
+  }
+
+  res.setHeader("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
+  res.setHeader("Access-Control-Allow-Credentials", "true");
+
+  next();
+});
+
+// 🔥 VERY IMPORTANT (preflight)
+app.options("*", (req, res) => {
+  res.sendStatus(200);
+});
 // ✅ Routes
 app.use("/api/tasks", taskRoutes);
 app.use("/api/auth", authRoutes);
