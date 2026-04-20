@@ -1,8 +1,8 @@
 import express from "express";
+const router = express.Router();
 import auth from "../middleware/auth.js";
 import Task from "../models/tasks.js";
 
-const router = express.Router();
 
 // ✅ GET tasks
 router.get("/tasks", auth, async (req, res) => {
