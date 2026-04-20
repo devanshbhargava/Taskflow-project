@@ -12,9 +12,9 @@ import authRoutes from "./routes/authroutes.js";
 const app = express();
 
 // ✅ Middleware (VERY IMPORTANT)
+app.use(cors());
 app.use(express.json());
 
-app.use(cors());
 
 // ✅ Connect DB
 connectdb();
