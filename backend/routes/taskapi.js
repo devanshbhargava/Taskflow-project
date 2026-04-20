@@ -18,4 +18,4 @@ router.post("/tasks", auth, (req, res) => {
   res.json(newTask);
 });
 
-module.exports = router;
+export default router;

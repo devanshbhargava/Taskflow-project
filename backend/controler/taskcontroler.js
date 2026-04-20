@@ -61,7 +61,7 @@ const updatetask = async (req, res) => {
 };
 
 
-module.exports = {
+export default {
   createtask,
   getalltask,
   deletetask,

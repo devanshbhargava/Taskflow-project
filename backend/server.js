@@ -14,10 +14,7 @@ const app = express();
 // ✅ Middleware (VERY IMPORTANT)
 app.use(express.json());
 
-app.use(cors({
-  origin: "https://taskflow-project-liard.vercel.app",
-  credentials: true
-}));
+app.use(cors());
 
 // ✅ Connect DB
 connectdb();
