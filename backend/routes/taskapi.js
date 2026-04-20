@@ -1,6 +1,6 @@
-const express = require("express");
+import express from "express";
 const router = express.Router();
-const auth = require("../middleware/auth");
+import auth from "../middleware/auth.js";
 
 let tasks = []; // temporary (later MongoDB)
 

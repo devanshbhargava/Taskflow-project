@@ -1,4 +1,4 @@
-const Task = require('../models/tasks');
+import Task from "../models/tasks.js"; 
 
 // CREATE TASK
 const createtask = async (req, res) => {

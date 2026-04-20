@@ -1,7 +1,8 @@
-const express = require("express");
+import express from "express";
+import auth from "../middleware/auth.js";
+import Task from "../models/tasks.js";
+
 const router = express.Router();
-const auth = require("../middleware/auth");
-const Task = require("../models/tasks");
 
 // ✅ GET tasks
 router.get("/tasks", auth, async (req, res) => {
