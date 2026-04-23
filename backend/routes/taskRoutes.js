@@ -5,7 +5,7 @@ import Task from "../models/tasks.js";
 
 
 // ✅ GET tasks
-router.get("/tasks", auth, async (req, res) => {
+router.get("/", auth, async (req, res) => {
   try {
     const tasks = await Task.find({ user: req.user.id });
     res.json(tasks);
@@ -16,7 +16,7 @@ router.get("/tasks", auth, async (req, res) => {
 });
 
 // ✅ CREATE
-router.post("/tasks", auth, async (req, res) => {
+router.post("/", auth, async (req, res) => {
   try {
     const task = new Task({
       ...req.body,
@@ -32,7 +32,7 @@ router.post("/tasks", auth, async (req, res) => {
 });
 
 // ✅ DELETE
-router.delete("/tasks/:id", async (req, res) => {
+router.delete("/:id", async (req, res) => {
   try {
     await Task.findByIdAndDelete(req.params.id);
     res.json({ message: "Deleted" });
@@ -43,7 +43,7 @@ router.delete("/tasks/:id", async (req, res) => {
 });
 
 // ✅ UPDATE
-router.put("/tasks/:id", async (req, res) => {
+router.put("/:id", async (req, res) => {
   try {
     const { title, completed } = req.body;
 
