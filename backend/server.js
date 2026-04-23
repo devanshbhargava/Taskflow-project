@@ -12,7 +12,6 @@ import authRoutes from "./routes/authroutes.js";
 const app = express();
 
 // ✅ Middleware (VERY IMPORTANT)
-const cors = require("cors");
 
 app.use(cors({
   origin: "https://taskflow-project-snowy.vercel.app",
