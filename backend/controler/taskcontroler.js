@@ -1,6 +1,6 @@
 import Task from "../models/tasks.js"; 
 
-// CREATE TASK
+
 const createtask = async (req, res) => {
   try {
     const { title } = req.body;
@@ -17,7 +17,7 @@ const createtask = async (req, res) => {
   }
 };
 
-// GET ALL TASKS
+
 const getalltask = async (req, res) => {
   try {
     const tasks = await Task.find(); // later: filter by user
@@ -42,7 +42,7 @@ const deletetask = async (req, res) => {
   }
 };
 
-// UPDATE TASK
+
 const updatetask = async (req, res) => {
   try {
     const { id } = req.params;

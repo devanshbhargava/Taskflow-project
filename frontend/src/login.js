@@ -22,18 +22,18 @@ function Login() {
 
       console.log("LOGIN RESPONSE:", data);
 
-      // ✅ Handle error
+     
       if (!res.ok || !data.token) {
         alert(data.message || "Login failed");
         return;
       }
 
-      // ✅ Save token
+      
       localStorage.setItem("token", data.token);
 
       alert("Login successful");
 
-      // ✅ Redirect
+      
       window.location.href = "/dashboard";
 
     } catch (error) {

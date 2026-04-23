@@ -4,7 +4,7 @@ import auth from "../middleware/auth.js";
 import Task from "../models/tasks.js";
 
 
-// ✅ GET tasks
+
 router.get("/", auth, async (req, res) => {
   try {
     const tasks = await Task.find({ user: req.user.id });
@@ -15,7 +15,7 @@ router.get("/", auth, async (req, res) => {
   }
 });
 
-// ✅ CREATE
+
 router.post("/", auth, async (req, res) => {
   try {
     const task = new Task({
@@ -31,7 +31,7 @@ router.post("/", auth, async (req, res) => {
   }
 });
 
-// ✅ DELETE
+
 router.delete("/:id", async (req, res) => {
   try {
     await Task.findByIdAndDelete(req.params.id);
@@ -42,7 +42,7 @@ router.delete("/:id", async (req, res) => {
   }
 });
 
-// ✅ UPDATE
+
 router.put("/:id", async (req, res) => {
   try {
     const { title, completed } = req.body;

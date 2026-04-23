@@ -22,18 +22,18 @@ function Signup() {
 
       console.log("SIGNUP RESPONSE:", data);
 
-      // ✅ handle error properly
+     
       if (!res.ok || !data.token) {
         alert(data.message || "Signup failed");
         return;
       }
 
-      // ✅ store token
+      
       localStorage.setItem("token", data.token);
 
       alert("Signup successful");
 
-      // ✅ redirect
+      
       window.location.href = "/dashboard";
 
     } catch (error) {

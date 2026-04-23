@@ -8,7 +8,7 @@ function Dashboard() {
   const [assignedTo, setAssignedTo] = useState("");
   const [filterPriority, setFilterPriority] = useState("All");
   const [filterStatus, setFilterStatus] = useState("All");
-  // 🔹 FETCH TASKS
+  
   async function fetchTasks() {
     const token = localStorage.getItem("token");
 
@@ -109,7 +109,7 @@ function Dashboard() {
   }
 };
 
-  // 🔹 DELETE TASK
+  
   async function deleteTask(id) {
     const token = localStorage.getItem("token");
 
@@ -132,11 +132,11 @@ function Dashboard() {
     }
   }
   const handleLogout = () => {
-  localStorage.removeItem("token"); // remove token
-  window.location.href = "/"; // redirect to login
+  localStorage.removeItem("token"); 
+  window.location.href = "/"; 
 };
 
-  // 🔹 UPDATE TASK ✅ (OUTSIDE deleteTask)
+  
   const editTask = async (id, oldTitle) => {
     const token = localStorage.getItem("token");
 
@@ -172,7 +172,7 @@ function Dashboard() {
     }
   };
 
-  // 🔹 LOAD TASKS
+  
   useEffect(() => {
     fetchTasks();
   }, []);
@@ -267,7 +267,7 @@ useEffect(() => {
 </div>
 
 
-    {/* Task List */}
+    
     <div style={styles.taskList}>
       {tasks.filter((task) => {
         const priorityMatch =
