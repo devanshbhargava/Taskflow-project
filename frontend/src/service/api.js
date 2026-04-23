@@ -1,5 +1,5 @@
 import axios from "axios";
-export const API_URL = "https://taskflow-project-wdmn.onrender.com";
+export const API_URL = "https://taskflow-project-q3af.onrender.com";
 
 export const getTasks = async () => {
   const res = await fetch(`${API_URL}/api/tasks`, {
